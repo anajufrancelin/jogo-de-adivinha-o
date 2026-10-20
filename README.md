@@ -8,20 +8,20 @@
 ## Compilar
 Com o JDK instalado, no diretório dos arquivos:
 
-    javac Servidor.java Cliente.java
+    javac Servidor2.java Cliente2.java
 
 Se aparecerem erros de caracteres (acentos), use:
 
-    javac -encoding UTF-8 Servidor.java Cliente.java
+    javac -encoding UTF-8 Servidor2.java Cliente2.java
 
 ## Executar
 Terminal 1 (servidor, porta TCP 5000):
 
-    java Servidor
+    java Servidor2
 
 Outros terminais (pelo menos três clientes):
 
-    java Cliente localhost
+    java Cliente2 localhost
 
 Para clientes em outras máquinas, use o IP do computador do servidor:
 
