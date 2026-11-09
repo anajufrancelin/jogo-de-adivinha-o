@@ -60,3 +60,39 @@ Haveria uma condição de corrida. Se dois clientes enviarem o palpite certo qua
 ## 4. O que acontece quando readLine() retorna null?
 Significa que o outro lado fechou a conexão (fim do fluxo), e não que chegou uma linha vazia. No servidor, o while ((linha = entrada.readLine()) != null) termina, o finally remove o jogador da lista e o try-with-resources fecha o socket, sem derrubar o servidor nem os outros jogadores. No cliente, a thread receptora sai do laço e marca encerrado = true. Já uma linha vazia retorna "", e o servidor a trata como entrada inválida, respondendo ERRO.
 
+## Execução do servidor com Docker
+
+### Pré-requisitos
+- Docker instalado (Windows com WSL ou Linux)
+- Java para rodar o cliente
+
+### Construir a imagem
+```bash
+docker build -t jogo-adivinhacao-grupo1 .
+```
+
+### Executar o servidor em contêiner
+```bash
+docker run -d --name servidor-jogo -p 5000:5000 jogo-adivinhacao-grupo1
+```
+
+### Verificar
+```bash
+docker images
+docker ps
+docker logs servidor-jogo
+```
+
+### Executar o cliente (fora do contêiner)
+```bash
+javac -d out Servidor2.java Cliente2.java
+java -cp out redes2.Cliente2 localhost
+```
+
+### Comandos Docker utilizados
+- `docker build -t nome .`: cria a imagem a partir do Dockerfile
+- `docker images`: lista as imagens
+- `docker run -d --name servidor-jogo -p 5000:5000 imagem`: cria e executa o contêiner em segundo plano, ligando a porta 5000 do computador à 5000 do contêiner
+- `docker ps`: mostra os contêineres em execução
+- `docker logs servidor-jogo`: mostra a saída do servidor
+- `docker stop servidor-jogo` e `docker rm servidor-jogo`: param e removem o contêiner
